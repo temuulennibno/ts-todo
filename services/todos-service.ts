@@ -1,10 +1,16 @@
 type Todo = {
   id: number;
-  name: string;
+  title: string;
   checked: boolean;
 };
 
-const todos: Todo[] = [{ id: 1, name: "Make bed", checked: false }];
+let NEXT_ID = 0;
+
+const todos: Todo[] = [
+  { id: ++NEXT_ID, title: "Make bed", checked: false },
+  { id: ++NEXT_ID, title: "Make bed 1", checked: false },
+  { id: ++NEXT_ID, title: "Make bed 2", checked: false },
+];
 
 export const getTodoList = () => {
   return todos;
@@ -14,20 +20,20 @@ export const getTodoById = (id: number) => {
   return todos.find((todo) => todo.id === id);
 };
 
-export const createTodo = (name: string) => {
+export const createTodo = (title: string) => {
   const newTodo: Todo = {
-    id: todos.length + 1,
-    name,
+    id: ++NEXT_ID,
+    title,
     checked: false,
   };
   todos.push(newTodo);
   return newTodo;
 };
 
-export const updateTodo = (id: number, name: string, checked: boolean) => {
+export const updateTodo = (id: number, title: string, checked: boolean) => {
   const todo = getTodoById(id);
   if (todo) {
-    todo.name = name;
+    todo.title = title;
     todo.checked = checked;
     return todo;
   }
